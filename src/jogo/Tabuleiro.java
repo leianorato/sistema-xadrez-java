@@ -59,6 +59,21 @@ public class Tabuleiro {
 	private boolean posicaoExistente(int linha, int coluna) {
 		return linha >= 0 && linha < linhas && coluna >= 0 && coluna < colunas; 
 	}
+	
+	public Peca removerPeca(Posicao posicao) {
+		if(!posicaoExistente(posicao)) {
+			throw new JogoException("Essa posição não existe");
+		}
+		
+		if(peca(posicao) == null) {
+			return null;
+		}
+		Peca aux = peca(posicao);
+		aux.posicao = null;
+		pecas[posicao.getLinha()][posicao.getColuna()] = null;
+		
+		return aux;
+	}
 
 	public boolean posicaoExistente(Posicao posicao) {
 		return posicaoExistente(posicao.getLinha(), posicao.getColuna());
