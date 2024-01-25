@@ -5,66 +5,63 @@ import jogo.Tabuleiro;
 import xadrez.Cor;
 import xadrez.PecaXadrez;
 
-public class Torre extends PecaXadrez{
+public class Bispo extends PecaXadrez{
 
-	public Torre(Tabuleiro tabuleiro, Cor cor) {
+	public Bispo(Tabuleiro tabuleiro, Cor cor) {
 		super(tabuleiro, cor);
 		// TODO Auto-generated constructor stub
 	}
 
-	//letra pra representar a Torre no tabuleiro impresso no terminal
 	@Override
 	public String toString() {
-		return "T";
+		return "B";
 	}
 
 	@Override
 	public boolean[][] movPossiveis() {
-		boolean[][] mat = new boolean[getTabuleiro().getLinhas()][getTabuleiro().getColunas()];
+		boolean[][] mat = new boolean[getTabuleiro().getLinhas()][getTabuleiro().getLinhas()];
 
 		Posicao p = new Posicao(0, 0);
 
-		// cima
-		p.setValores(posicao.getLinha() - 1, posicao.getColuna());
+		// noroeste
+		p.setValores(posicao.getLinha() - 1, posicao.getColuna() - 1);
 		while (getTabuleiro().posicaoExistente(p) && !getTabuleiro().temPecaAqui(p)) {
 			mat[p.getLinha()][p.getColuna()] = true;
-			p.setLinha(p.getLinha() - 1);
+			p.setValores(p.getLinha() - 1, p.getColuna() - 1);
 		}
 		if (getTabuleiro().posicaoExistente(p) && existePecaOponente(p)) {
 			mat[p.getLinha()][p.getColuna()] = true;
 		}
 
-		// baixo
-		p.setValores(posicao.getLinha() + 1, posicao.getColuna());
+		// nordeste
+		p.setValores(posicao.getLinha() - 1, posicao.getColuna() + 1);
 		while (getTabuleiro().posicaoExistente(p) && !getTabuleiro().temPecaAqui(p)) {
 			mat[p.getLinha()][p.getColuna()] = true;
-			p.setLinha(p.getLinha() + 1);
+			p.setValores(p.getLinha() - 1, p.getColuna() + 1);
 		}
 		if (getTabuleiro().posicaoExistente(p) && existePecaOponente(p)) {
 			mat[p.getLinha()][p.getColuna()] = true;
 		}
 
-		// esquerda
-		p.setValores(posicao.getLinha(), posicao.getColuna() - 1);
+		// sudeste
+		p.setValores(posicao.getLinha() + 1, posicao.getColuna() + 1);
 		while (getTabuleiro().posicaoExistente(p) && !getTabuleiro().temPecaAqui(p)) {
 			mat[p.getLinha()][p.getColuna()] = true;
-			p.setColuna(p.getColuna() - 1);
+			p.setValores(p.getLinha() + 1, p.getColuna() + 1);
 		}
 		if (getTabuleiro().posicaoExistente(p) && existePecaOponente(p)) {
 			mat[p.getLinha()][p.getColuna()] = true;
 		}
 
-		// direita
-		p.setValores(posicao.getLinha(), posicao.getColuna() + 1);
+		// sudoeste
+		p.setValores(posicao.getLinha() + 1, posicao.getColuna() - 1);
 		while (getTabuleiro().posicaoExistente(p) && !getTabuleiro().temPecaAqui(p)) {
 			mat[p.getLinha()][p.getColuna()] = true;
-			p.setColuna(p.getColuna() + 1);
+			p.setValores(p.getLinha() + 1, p.getColuna() - 1);
 		}
 		if (getTabuleiro().posicaoExistente(p) && existePecaOponente(p)) {
 			mat[p.getLinha()][p.getColuna()] = true;
 		}
-
-
 
 		return mat;
 	}

@@ -5,17 +5,16 @@ import jogo.Tabuleiro;
 import xadrez.Cor;
 import xadrez.PecaXadrez;
 
-public class Torre extends PecaXadrez{
+public class Rainha extends PecaXadrez{
 
-	public Torre(Tabuleiro tabuleiro, Cor cor) {
+	public Rainha(Tabuleiro tabuleiro, Cor cor) {
 		super(tabuleiro, cor);
 		// TODO Auto-generated constructor stub
 	}
 
-	//letra pra representar a Torre no tabuleiro impresso no terminal
 	@Override
 	public String toString() {
-		return "T";
+		return "R";
 	}
 
 	@Override
@@ -44,6 +43,7 @@ public class Torre extends PecaXadrez{
 			mat[p.getLinha()][p.getColuna()] = true;
 		}
 
+
 		// esquerda
 		p.setValores(posicao.getLinha(), posicao.getColuna() - 1);
 		while (getTabuleiro().posicaoExistente(p) && !getTabuleiro().temPecaAqui(p)) {
@@ -65,9 +65,48 @@ public class Torre extends PecaXadrez{
 		}
 
 
+		// no
+		p.setValores(posicao.getLinha() - 1, posicao.getColuna() - 1);
+		while (getTabuleiro().posicaoExistente(p) && !getTabuleiro().temPecaAqui(p)) {
+			mat[p.getLinha()][p.getColuna()] = true;
+			p.setValores(p.getLinha() - 1, p.getColuna() - 1);
+		}
+		if (getTabuleiro().posicaoExistente(p) && existePecaOponente(p)) {
+			mat[p.getLinha()][p.getColuna()] = true;
+		}
+
+		// ne
+		p.setValores(posicao.getLinha() - 1, posicao.getColuna() + 1);
+		while (getTabuleiro().posicaoExistente(p) && !getTabuleiro().temPecaAqui(p)) {
+			mat[p.getLinha()][p.getColuna()] = true;
+			p.setValores(p.getLinha() - 1, p.getColuna() + 1);
+		}
+		if (getTabuleiro().posicaoExistente(p) && existePecaOponente(p)) {
+			mat[p.getLinha()][p.getColuna()] = true;
+		}
+
+		// se
+		p.setValores(posicao.getLinha() + 1, posicao.getColuna() + 1);
+		while (getTabuleiro().posicaoExistente(p) && !getTabuleiro().temPecaAqui(p)) {
+			mat[p.getLinha()][p.getColuna()] = true;
+			p.setValores(p.getLinha() + 1, p.getColuna() + 1);
+		}
+		if (getTabuleiro().posicaoExistente(p) && existePecaOponente(p)) {
+			mat[p.getLinha()][p.getColuna()] = true;
+		}
+
+		// so
+		p.setValores(posicao.getLinha() + 1, posicao.getColuna() - 1);
+		while (getTabuleiro().posicaoExistente(p) && !getTabuleiro().temPecaAqui(p)) {
+			mat[p.getLinha()][p.getColuna()] = true;
+			p.setValores(p.getLinha() + 1, p.getColuna() - 1);
+		}
+		if (getTabuleiro().posicaoExistente(p) && existePecaOponente(p)) {
+			mat[p.getLinha()][p.getColuna()] = true;
+		}
 
 		return mat;
-	}
 
+	}
 
 }
